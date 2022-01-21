@@ -4,16 +4,87 @@ import pandas
 import matplotlib.pyplot as plt
 import numpy as np
 
+def heat_cooling_combined(data):
+    spring_summer_points = [18019, 18385, 18748]
+    fall_points = [17775, 18138, 18505, 18872]
+    winter_points = [17897, 18260, 18626]
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+
+
+    ax1.plot(data['Date'], data['Heating (kWh)'], color='darkorange')
+
+    ax1.plot([spring_summer_points[0],spring_summer_points[0]], [0,50000], label = 'Spring/Summer Semester Start', color='blue')
+    ax1.plot([spring_summer_points[1],spring_summer_points[1]], [0,50000], color='blue')
+    ax1.plot([spring_summer_points[2],spring_summer_points[2]], [0,50000], color='blue')
+    ax1.plot([fall_points[0],fall_points[0]], [0,50000], label = 'Fall Semester Start', color='red')
+    ax1.plot([fall_points[1],fall_points[1]], [0,50000], color='red')
+    ax1.plot([fall_points[2],fall_points[2]], [0,50000], color='red')
+    ax1.plot([fall_points[3],fall_points[3]], [0,50000], color='red')
+    ax1.plot([winter_points[0],winter_points[0]], [0,50000], label = 'Winter Semester Start', color='green')
+    ax1.plot([winter_points[1],winter_points[1]], [0,50000], color='green')
+    ax1.plot([winter_points[2],winter_points[2]], [0,50000], color='green')
+
+    ax1.set_xlabel('Date')
+    ax1.set_ylabel('Heating (kWh)', color='darkorange')
+    plt.xticks(rotation = 45)
+
+    ax2 = ax1.twinx()
+    ax2.plot(data['Date'], data['Cooling (kWh)'], color='tan')
+    ax2.set_ylabel('Cooling (kWh)', color='tan')
+
+
+    plt.title('Building Heating and Cooling Trends Over Time')
+    ax1.legend(loc=1)
+
+    plt.show()
+
+def electricity_gas_combined(data):
+    spring_summer_points = [18019, 18385, 18748]
+    fall_points = [17775, 18138, 18505, 18872]
+    winter_points = [17897, 18260, 18626]
+
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+
+
+    ax1.plot(data['Date'], data['Electricity (kWh)'], color='darkorange')
+
+    ax1.plot([spring_summer_points[0],spring_summer_points[0]], [0,50000], label = 'Spring/Summer Semester Start', color='blue')
+    ax1.plot([spring_summer_points[1],spring_summer_points[1]], [0,50000], color='blue')
+    ax1.plot([spring_summer_points[2],spring_summer_points[2]], [0,50000], color='blue')
+    ax1.plot([fall_points[0],fall_points[0]], [0,50000], label = 'Fall Semester Start', color='red')
+    ax1.plot([fall_points[1],fall_points[1]], [0,50000], color='red')
+    ax1.plot([fall_points[2],fall_points[2]], [0,50000], color='red')
+    ax1.plot([fall_points[3],fall_points[3]], [0,50000], color='red')
+    ax1.plot([winter_points[0],winter_points[0]], [0,50000], label = 'Winter Semester Start', color='green')
+    ax1.plot([winter_points[1],winter_points[1]], [0,50000], color='green')
+    ax1.plot([winter_points[2],winter_points[2]], [0,50000], color='green')
+
+    ax1.set_xlabel('Date')
+    ax1.set_ylabel('Electricity (kWh)', color='darkorange')
+    plt.xticks(rotation = 45)
+
+    ax2 = ax1.twinx()
+    ax2.plot(data['Date'], data['Nat Gas (kWh)'], color='tan')
+    ax2.set_ylabel('Natural Gas (kWh)', color='tan')
+
+
+    plt.title('Electricity and Natural Gas Trends Over Time')
+    ax1.legend(loc=1)
+
+    plt.show()
+
+
 data = pandas.read_csv('building1.csv', sep=',', header=0)
 data.head()
 
 data['Date'] = pandas.to_datetime(data['Date'])
 
-plt.plot(data['Date'], data['Heating (kWh)'])
-plt.xlabel('Date')
-plt.ylabel('Heating (kWh)')
-plt.show()
-
+heat_cooling_combined(data)
+electricity_gas_combined(data)
+exit()
 
 # helper variables to specify the years of interest and the columns.
 years = [2018, 2019, 2020, 2021]
@@ -88,3 +159,5 @@ plt.ylabel('Daily kWh')
 
 # Show the plot
 plt.show()
+
+#To do: Titles, annotations
