@@ -200,24 +200,24 @@ def covid_shutdown(data):
 
     ax1.plot(averages['Date'], averages['Heating'], color='darkorange', label = 'Heating Average', linewidth = 1)
     ax1.plot(data2020['Date'], data2020['Heating (kWh)'], color='darkorange', linewidth = 2 , label = 'Heating 2020')
-    ax1.plot(covid_closure, [0,50000], label = 'March 13 2020 - Classes Moved Online', color='blue', linewidth = 3)
+    ax1.plot(covid_closure, [0,50000], label = 'Classes Moved Online', color='blue', linewidth = 3)
 
 
     ax2.plot(averages['Date'], averages['Cooling'], color='red', label = 'Cooling Average', linewidth = 1)
     ax2.plot(data2020['Date'], data2020['Cooling (kWh)'], color='red', linewidth = 2 , label = 'Cooling 2020')
-    ax2.plot(covid_closure, [0,50000], label = 'March 13 2020 - Classes Moved Online', color='blue', linewidth = 3)
+    ax2.plot(covid_closure, [0,50000], label = 'Classes Moved Online', color='blue', linewidth = 3)
 
     ax3.plot(averages['Date'], averages['Electricity'], color='gold', label = 'Electricity Average', linewidth = 1)
     ax3.plot(data2020['Date'], data2020['Electricity (kWh)'], color='gold', linewidth = 2 , label = 'Electricity 2020')
-    ax3.plot(covid_closure, [0,50000], label = 'March 13 2020 - Classes Moved Online', color='blue', linewidth = 3)
+    ax3.plot(covid_closure, [0,50000], label = 'Classes Moved Online', color='blue', linewidth = 3)
 
     ax4.plot(averages['Date'], averages['Nat Gas'], color='tan', label = 'Natural Gas Average', linewidth = 1)
     ax4.plot(data2020['Date'], data2020['Nat Gas (kWh)'], color='tan', linewidth = 2 , label = 'Natural Gas 2020')
-    ax4.plot(covid_closure, [0,50000], label = 'March 13 2020 - Classes Moved Online', color='blue', linewidth = 3)
+    ax4.plot(covid_closure, [0,50000], label = 'Classes Moved Online', color='blue', linewidth = 3)
 
     ax5.plot(averages['Date'], averages['Water'], color='lightcoral', label = 'Domestic Water Average', linewidth = 1)
     ax5.plot(data2020['Date'], data2020['Domestic Water (m3)'], color='lightcoral', linewidth = 2 , label = 'Domestic Water 2020')
-    ax5.plot(covid_closure, [0,50000], label = 'March 13 2020 - Classes Moved Online', color='blue', linewidth = 3)
+    ax5.plot(covid_closure, [0,50000], label = 'Classes Moved Online', color='blue', linewidth = 3)
 
     ax1.legend()
     ax2.legend()
@@ -234,15 +234,45 @@ def covid_shutdown(data):
     plt.show()
     return
 
+def comparing_buildings(data1, data2):
+    
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
 
-data = pandas.read_csv('building1.csv', sep=',', header=0)
-data.head()
 
-data['Date'] = pandas.to_datetime(data['Date'])
+    ax1.plot(data1['Date'], data1['Heating (kWh)'], color='darkorange', linestyle = 'solid', label = 'Heating(kwh): Building 1')
+    ax1.plot(data1['Date'], data2['Heating (kWh)'], color='darkorange', linestyle = 'dotted', label = 'Heating(kwh): Building 2')
+    ax1.plot(data1['Date'], data1['Cooling (kWh)'], color='red', linestyle = 'solid', label = 'Cooling(kwh): Building 1')
+    ax1.plot(data1['Date'], data2['Cooling (kWh)'], color='red', linestyle = 'dotted', label = 'Cooling(kwh): Building 2')
 
-heat_cooling_combined(data)
-electricity_gas_combined(data)
-yearly_all_combined(data)
-months_weeks_all(data)
-covid_shutdown(data)
+    ax1.set_xlabel('Date')
+    plt.xticks(rotation = 45)
+
+    ax2 = ax1.twinx()
+    ax2.plot(data1['Date'], data1['Electricity (kWh)'], color='gold', linestyle = 'solid', label = 'Electricity(kwh): Building 1')
+    ax2.plot(data1['Date'], data2['Electricity (kWh)'], color='gold', linestyle = 'dotted', label = 'Electricity(kwh): Building 2')
+
+
+
+    plt.title('Building Heating and Cooling Trends Over Time')
+    
+    fig.legend(loc='upper right')
+
+    plt.show()
+    return
+
+data1 = pandas.read_csv('building1.csv', sep=',', header=0)
+data1.head()
+data1['Date'] = pandas.to_datetime(data1['Date'])
+
+data2 = pandas.read_csv('building2.csv', sep=',', header=0)
+data2.head()
+data2['Date'] = pandas.to_datetime(data2['Date'])
+
+# heat_cooling_combined(data1)
+# electricity_gas_combined(data1)
+# yearly_all_combined(data1)
+# months_weeks_all(data1)
+# covid_shutdown(data1)
+comparing_buildings(data1, data2)
 
