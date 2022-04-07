@@ -9,6 +9,7 @@ The data was created with the intention of spotting weekly, monthly and seasonal
 It also looks at the impact COVID-19 had on these factors
 
 **Running**
+
 Download entire folder and open the folders terminal.
 Must have a version of python 3 installed.
 Must have numpy and matplotlib installed or run the local vitrual environment 'venv\Scripts\activate' that has them preinstalled.
