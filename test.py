@@ -323,10 +323,10 @@ data2 = pandas.read_csv('building2.csv', sep=',', header=0)
 data2.head()
 data2['Date'] = pandas.to_datetime(data2['Date'])
 
-heat_cooling_combined(data1) #For Q1
-electricity_gas_combined(data1) #For Q1
-yearly_all_combined(data1) #For Q1
-months_weeks_all(data1) #For Q1
-covid_shutdown(data1) #For Q2
-comparing_buildings(data1, data2) #For Q3
+heat_cooling_combined(data1) 
+electricity_gas_combined(data1) 
+yearly_all_combined(data1) 
+months_weeks_all(data1) 
+covid_shutdown(data1) 
+comparing_buildings(data1, data2) 
 
